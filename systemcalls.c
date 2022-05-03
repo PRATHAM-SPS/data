@@ -1,37 +1,18 @@
+#include<stdio.h>
+#include <unistd.h>
+#include<string.h>
 #include<fcntl.h>
-#include<sys/types.h>
-#include<unistd.h>
-#include<sys/stat.h>
 int main()
 {
-        int n, fd, fd1;
-        char buf[30];
-        fd=open("text.txt", O_RDONLY);
-        n=read(fd, buf, 20);
-        fd1=open("target", O_CREAT|O_WRONLY,0642);
-        write(fd1, buf, n);
-}
-
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<unistd.h>
-int main(int argc, char *argv[])
-{
-        printf("PID of exp.c= %d\n", getpid());
-        char *args[]={"Hello","C", "Programming", NULL};
-        execv("./hello",args);
-        printf("Back to exp.c");
-        return 0;
-}
-
-
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-int main(int argc, char *argv[])
-{
-        printf("We are in hello.c\n");
-        printf("PID of hello.c= %d\n", getpid());
-        return 0;
+	char data[64];
+	printf("getuid : %d \n",getuid());
+	printf("geteuid : %d \n",geteuid());
+	printf("getgid : %d \n",getgid());
+	printf("getegid : %d \n",getegid());
+	int fd = open("/home/shraddha/SYCALL.txt", O_CREAT | O_RDWR | O_APPEND);
+	printf("fd : %d\n", fd);
+	int read1 = read(fd,data,64);
+	printf("%d\n",read1);
+	int w = write(fd,"smita",strlen("smita"));
+	close(fd);
 }
